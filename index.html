@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Case File: Tsedey Fasil</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Special+Elite&family=Work+Sans:wght@400;500;600&family=Noto+Serif+Ethiopic:wght@500;700&display=swap">
+<style>
+/* VOICE: tender and funny, a best friend writing in the voice of a crime show
+   IDEA: a detective's case file on Tsedey, opened under an interrogation spotlight
+   PICTURE: her spotlight portrait, then an evidence board of pinned photos
+   COLOUR and TYPE: night black, manila paper, evidence red; Instrument Serif, Special Elite for typed notes, Work Sans
+   LAYOUT: cover, charges, evidence board, associate, timeline, witnesses, evaluation, verdict */
+:root{color-scheme:dark;--bg:#0f0d0d;--ink:#f3ece0;--dim:#b9ad9b;--paper:#efe4cc;--paperInk:#231c14;--red:#c8102e;--red2:#8e0b20;--line:#2a2424}
+*{box-sizing:border-box;min-width:0}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16.5px/1.6 "Work Sans",system-ui,sans-serif;overflow-x:clip}
+img{display:block;max-width:100%}
+h1,h2,h3{font-family:"Instrument Serif",Georgia,serif;font-weight:400;line-height:1.05;text-wrap:balance;margin:0}
+h2{font-size:clamp(34px,5vw,52px)}
+.typed{font-family:"Special Elite","Courier New",monospace}
+.am{font-family:"Noto Serif Ethiopic",serif}
+.band{padding:clamp(48px,7vw,104px) max(5vw,18px)}
+.wrap{max-width:1180px;margin:0 auto}
+.lede{color:var(--dim);max-width:62ch;margin:14px 0 0}
+.tag{display:inline-block;font-size:14px;color:var(--red);border:1.5px solid var(--red);padding:3px 10px;border-radius:3px;transform:rotate(-2deg);margin-bottom:18px}
+
+/* cover */
+.cover{min-height:100svh;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);align-items:center;gap:clamp(24px,5vw,72px);padding:clamp(28px,5vw,72px) max(5vw,18px);position:relative;
+ background:radial-gradient(60% 70% at 72% 45%,#2b2524 0%,var(--bg) 70%)}
+.cover h1{font-size:clamp(52px,8.5vw,112px)}
+.cover h1 i{color:var(--red)}
+.cover .line{font-size:clamp(19px,2.2vw,24px);font-family:"Instrument Serif",serif;font-style:italic;color:var(--dim);margin:22px 0 30px;max-width:30ch}
+.portrait{position:relative;justify-self:center;width:min(100%,460px)}
+.portrait img{width:100%;aspect-ratio:2/3;object-fit:cover;border-radius:4px;box-shadow:0 30px 80px #000c}
+.portrait .clip{position:absolute;top:-14px;left:50%;translate:-50% 0;width:70px;height:28px;background:#9a9188;border-radius:4px 4px 0 0;box-shadow:0 2px 0 #5c5550}
+.portrait .plate{position:absolute;left:-14px;bottom:28px;background:var(--paper);color:var(--paperInk);padding:10px 16px;font-size:14px;box-shadow:0 8px 20px #0009;transform:rotate(-3deg)}
+.btn{font:600 16px "Work Sans",sans-serif;background:var(--red);color:#fff;border:0;border-radius:4px;padding:14px 22px;min-height:48px;cursor:pointer;transition:background .2s}
+.btn:hover{background:var(--red2)}
+.btn.ghost{background:transparent;border:1.5px solid var(--dim);color:var(--ink)}
+.btn:focus-visible,button:focus-visible{outline:3px solid #fff;outline-offset:3px}
+
+/* charges */
+.paper{background:var(--paper);color:var(--paperInk)}
+.paper .lede{color:#5b4f40}
+#charges{counter-reset:c}
+.cgroup{font-size:clamp(28px,3.6vw,38px);font-style:italic;color:var(--red2);margin:48px 0 0}
+.charges{list-style:none;padding:0;margin:16px 0 0;display:grid;gap:0}
+.charges li{display:grid;grid-template-columns:5.5em minmax(0,1fr);gap:16px;padding:18px 0;border-top:1px dashed #a8987c;counter-increment:c}
+.charges li::before{content:"Count " counter(c);font-family:"Special Elite",monospace;color:var(--red);font-size:15px;padding-top:4px}
+.charges b{font-family:"Instrument Serif",serif;font-weight:400;font-size:26px;display:block;line-height:1.15}
+
+/* evidence board */
+.board{background:#3a2a1f;background-image:radial-gradient(#4a3729 1px,transparent 1.5px);background-size:9px 9px}
+.board h2,.board .lede{color:#f6ead6}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,250px),1fr));gap:34px 26px;margin-top:44px}
+.pin{background:#fbf6ec;color:var(--paperInk);padding:12px 12px 16px;box-shadow:0 14px 30px #0008;position:relative;cursor:zoom-in;border:0;text-align:left;font:inherit;transition:transform .25s}
+.pin:nth-child(3n+1){transform:rotate(-1.6deg)}.pin:nth-child(3n+2){transform:rotate(1.2deg)}.pin:nth-child(3n){transform:rotate(-.5deg)}
+.pin:hover{transform:rotate(0) scale(1.02)}
+.pin::after{content:"";position:absolute;top:-7px;left:50%;width:16px;height:16px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#ff5a6e,var(--red) 55%,#5e0614);box-shadow:0 3px 4px #0007}
+.pin img{width:100%;aspect-ratio:4/5;object-fit:cover;background:#ddd}
+.pin .ex{font-family:"Special Elite",monospace;color:var(--red);font-size:14px;margin-top:12px}
+.pin .cap{font-size:15px;line-height:1.45;margin-top:4px}
+
+/* interactive exhibits */
+.duo{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:26px;margin-top:48px}
+.card{background:#1a1616;border:1px solid var(--line);border-radius:6px;padding:26px}
+.card h3{font-size:30px}
+.card p{color:var(--dim);margin:8px 0 18px}
+.count{font-family:"Instrument Serif",serif;font-size:clamp(64px,9vw,96px);line-height:1;color:var(--ink)}
+.count small{font-size:18px;color:var(--dim);font-family:"Work Sans",sans-serif;margin-left:8px}
+.note{font-size:15px;color:var(--red);min-height:24px;margin-top:10px}
+.drum{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.pad{min-height:96px;border-radius:50%/40%;border:0;cursor:pointer;font:600 15px "Work Sans",sans-serif;color:#2b1a0e;
+ background:radial-gradient(circle at 50% 40%,#f1d9ae,#c99b5d 70%,#7d5428);box-shadow:inset 0 -6px 0 #0003,0 8px 16px #0008;transition:transform .08s}
+.pad.small{transform:scale(.86)}
+.pad:active,.pad.hit{transform:scale(.95)}
+.pad.small:active,.pad.small.hit{transform:scale(.82)}
+
+/* associate */
+.assoc{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:clamp(24px,5vw,64px);align-items:center}
+.pair{display:grid;grid-template-columns:1.15fr 1fr;gap:16px;align-items:end}
+.pair .pin{cursor:zoom-in}
+
+/* timeline */
+.tl{list-style:none;padding:0;margin:40px 0 0;position:relative}
+.tl::before{content:"";position:absolute;left:9px;top:6px;bottom:6px;width:2px;background:var(--red)}
+.tl li{position:relative;padding:0 0 30px 44px}
+.tl li::before{content:"";position:absolute;left:2px;top:7px;width:16px;height:16px;border-radius:50%;background:var(--bg);border:3px solid var(--red)}
+.tl .when{font-family:"Special Elite",monospace;color:var(--red);font-size:15px}
+.tl b{display:block;font-family:"Instrument Serif",serif;font-weight:400;font-size:27px;line-height:1.2}
+.tl p{margin:4px 0 0;color:var(--dim);max-width:60ch}
+
+/* witnesses */
+.wit{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:18px;margin-top:40px}
+.wit div{background:#fbf6ec;color:var(--paperInk);padding:22px;border-radius:3px;box-shadow:0 8px 20px #0002}
+.wit .who{font-family:"Special Elite",monospace;color:var(--red);font-size:14px}
+.wit q{display:block;font-family:"Instrument Serif",serif;font-size:25px;line-height:1.2;margin-top:8px;quotes:none}
+
+/* evaluation */
+.eval{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,5vw,64px);align-items:start}
+.report{background:var(--paper);color:var(--paperInk);padding:clamp(22px,3vw,36px);border-radius:3px;box-shadow:0 20px 50px #000a;font-size:16px}
+.report table{width:100%;border-collapse:collapse}
+.report td{padding:11px 0;border-bottom:1px dashed #a8987c;vertical-align:top}
+.report td:first-child{font-family:"Special Elite",monospace;width:42%;padding-right:12px;color:#6a5a44;font-size:15px}
+.report .sig{margin-top:18px;font-family:"Instrument Serif",serif;font-style:italic;font-size:20px}
+.dog{width:100%;max-width:340px;margin:28px 0 0}
+.dog .tail{transform-origin:212px 120px;animation:wag .5s ease-in-out infinite alternate}
+@keyframes wag{to{transform:rotate(22deg)}}
+
+/* verdict */
+.verdict{text-align:center;background:radial-gradient(50% 60% at 50% 40%,#2e2726,var(--bg) 75%)}
+.verdict .reveal{display:none;margin-top:40px}
+.verdict.open .reveal{display:block}
+.verdict.open #vbtn{display:none}
+.vphoto{position:relative;width:min(100%,400px);margin:0 auto}
+.vphoto img{width:100%;aspect-ratio:2/3;object-fit:cover;border-radius:4px;box-shadow:0 30px 70px #000}
+.stamp{position:absolute;right:-10px;bottom:40px;border:4px solid var(--red);color:var(--red);font:700 24px "Special Elite",monospace;padding:8px 14px;transform:rotate(-12deg);background:#0f0d0dcc}
+.verdict.open .stamp{animation:thump .5s cubic-bezier(.2,1.6,.4,1) .3s both}
+@keyframes thump{from{transform:rotate(-12deg) scale(2.6);opacity:0}to{transform:rotate(-12deg) scale(1);opacity:1}}
+.vtext{font-family:"Instrument Serif",serif;font-size:clamp(30px,4.4vw,46px);line-height:1.15;max-width:22ch;margin:40px auto 0;text-wrap:balance}
+.vtext em{color:var(--red)}
+.amh{font-size:clamp(30px,5vw,48px);margin:40px 0 6px;color:var(--ink)}
+.amsub{color:var(--dim);margin:0 auto;max-width:52ch}
+.letter{max-width:60ch;margin:44px auto 0;text-align:left;background:var(--paper);color:var(--paperInk);padding:clamp(22px,3vw,36px);border-radius:3px;font-size:17px}
+.letter p{margin:0 0 14px}
+.letter .sig{font-family:"Instrument Serif",serif;font-style:italic;font-size:22px;margin:0}
+footer{text-align:center;padding:36px 18px 48px;color:var(--dim);font-size:14px}
+
+/* lightbox */
+.lb{position:fixed;inset:0;background:#000e;display:none;align-items:center;justify-content:center;padding:20px;z-index:10;flex-direction:column;gap:14px}
+.lb.on{display:flex}
+.lb img{max-height:80svh;max-width:100%;width:auto;border-radius:4px}
+.lb p{color:#eee;text-align:center;max-width:52ch;margin:0}
+.lb button{position:absolute;top:14px;right:14px;width:48px;height:48px;border-radius:50%;border:0;background:#fff2;color:#fff;font-size:26px;cursor:pointer}
+
+@media(max-width:820px){
+ .cover{grid-template-columns:1fr;min-height:auto;padding-top:48px}
+ .portrait{order:-1;width:min(100%,360px)}
+ .duo,.assoc,.eval{grid-template-columns:1fr}
+}
+@media(max-width:520px){.charges li{grid-template-columns:1fr;gap:4px}.charges b{font-size:23px}.stamp{font-size:19px;right:0}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header class="cover">
+  <div>
+    <span class="tag typed">Case no. 1 · Opened freshman year</span>
+    <h1>The case of <i>Tsedey Fasil</i></h1>
+    <p class="line">Tsedey Fasil. Why don't you have a seat right over there.</p>
+    <a class="btn" href="#charges" style="text-decoration:none;display:inline-flex;align-items:center">Open the case file</a>
+  </div>
+  <figure class="portrait" style="margin:0">
+    <span class="clip"></span>
+    <img src="img/p12.jpg" alt="Tsedey in a spotlight, smiling at the camera">
+    <span class="plate typed">Subject: Tsedey Fasil<br>Status: birthday</span>
+  </figure>
+</header>
+
+<section class="band paper" id="charges">
+  <div class="wrap">
+    <h2>The charges</h2>
+    <p class="lede">After years of close observation, the following counts are brought against the subject. Every single one of them is true, and she is guilty of all of them.</p>
+    <h3 class="cgroup">Her beautiful soul</h3>
+    <ol class="charges">
+      <li><span><b>Having the kindest heart in any room she walks into</b>She is gentle with people, patient with them, and genuinely lovely to be around. You leave a conversation with her feeling a little lighter than when you came.</span></li>
+      <li><span><b>Showing up in every up and every down</b>When things were good, she was there to celebrate. When things were hard, she was there anyway, without being asked. That kind of loyalty is rare, and she gives it like it costs nothing.</span></li>
+      <li><span><b>Loving God with her whole heart</b>Her faith isn't for show. She pays real attention to it, lives it quietly, and serves at church on the kebero. It shapes how she treats everyone around her.</span></li>
+      <li><span><b>Loving animals, dogs most of all</b>You can tell a lot about a person by how they treat a dog. Her answer is: like family.</span></li>
+      <li><span><b>Becoming part of a family that isn't hers</b>Her mom loves me, my mom loves her, my sisters and my dad love her too, and they all ask about her. Nobody planned that. She is just impossible not to love.</span></li>
+    </ol>
+    <h3 class="cgroup">Her beautiful brain</h3>
+    <ol class="charges">
+      <li><span><b>Being dangerously articulate</b>She can put into words what most people only feel. She says exactly what she means, says it beautifully, and wins the argument before you notice there was one.</span></li>
+      <li><span><b>Having principles and actually keeping them</b>Most people have values. She lives by hers every day, even when nobody is watching and even when it would be easier not to.</span></li>
+      <li><span><b>Being endlessly interesting</b>You never run out of things to talk about with her. She studied the human mind, watches every crime show going, and somehow understands people better than they understand themselves.</span></li>
+      <li><span><b>Hustling with discipline</b>Psychology degree in four years, right on time. She works hard, keeps her word, and makes it all look calm.</span></li>
+    </ol>
+    <h3 class="cgroup">Her beautiful face</h3>
+    <ol class="charges">
+      <li><span><b>Being drop dead gorgeous</b>In most case files that phrase means something very different. In this one it means exactly what it says. Look at her. The evidence board below is overwhelming.</span></li>
+      <li><span><b>Glowing from the inside out</b>And the thing is, what makes her so beautiful in every one of these photos is everything above. The kind heart shows in her smile. The sharp mind shows in her eyes. The rest is just a bonus.</span></li>
+    </ol>
+  </div>
+</section>
+
+<section class="band board">
+  <div class="wrap">
+    <h2>The evidence board</h2>
+    <p class="lede">Photographs recovered over several years. Tap any exhibit to examine it closely.</p>
+    <div class="grid" id="grid"></div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <h2>Two exhibits require a demonstration</h2>
+    <div class="duo">
+      <div class="card">
+        <span class="tag typed">Exhibit P</span>
+        <h3>The pushup record</h3>
+        <p>Last confirmed count was five. The investigation suspects the number has gone up since. Log the recount here.</p>
+        <div class="count"><span id="pc">5</span><small>pushups on record</small></div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:18px">
+          <button class="btn" id="pup">Log one more</button>
+          <button class="btn ghost" id="preset">Reset to 5</button>
+        </div>
+        <div class="note typed" id="pnote"></div>
+      </div>
+      <div class="card">
+        <span class="tag typed">Exhibit K</span>
+        <h3>The kebero</h3>
+        <p>The subject plays the drum at church. Big side for the deep beat, small side for the high one. Try keeping up with her.</p>
+        <div class="drum">
+          <button class="pad" id="dum" aria-label="Big side of the drum">Big side</button>
+          <button class="pad small" id="tek" aria-label="Small side of the drum">Small side</button>
+        </div>
+        <div class="note typed" id="dnote">Tip: you can also use the D and K keys.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band" style="background:#171313">
+  <div class="wrap assoc">
+    <div>
+      <span class="tag typed">Known associate</span>
+      <h2>Known associate: me</h2>
+      <p class="lede">We met at the very start of freshman year. Since then the subject has been present at every up and every down. She has been there for the good days, the hard days, and all the ones in between.</p>
+      <p class="lede">Surveillance shows photobooth strips and late night video calls with terrible image quality. Investigators agree the image quality does not matter.</p>
+    </div>
+    <div class="pair" id="pair"></div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <h2>Timeline of events</h2>
+    <ol class="tl">
+      <li><span class="when">Freshman year</span><b>First contact</b><p>Two strangers at the start of uni. Neither of us knew this was the beginning of one of the best things that would happen to us.</p></li>
+      <li><span class="when">The uni years</span><b>Memories, repeatedly</b><p>Ups, downs, long days and good laughs. She made uni memorable, and none of it would have been the same without her.</p></li>
+      <li><span class="when">Year four</span><b>She graduates in psychology, right on time</b><p>Four years, done, as disciplined as ever.</p></li>
+      <li><span class="when">Year five</span><b>I stay one more year</b><p>Investigators are still trying to work out whether the extra year was the curriculum, or whether campus just felt quieter without her.</p></li>
+      <li><span class="when">Now</span><b>Both graduated. Still making memories.</b><p>This case remains open. New evidence comes in all the time.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="band paper">
+  <div class="wrap">
+    <h2>Witness statements</h2>
+    <p class="lede">Gathered from the household of her best friend, where she is, by all accounts, a full member.</p>
+    <div class="wit">
+      <div><span class="who">Her mom</span><q>Loves me.</q><p style="margin:8px 0 0;font-size:15px">Which tells you she raised a daughter with excellent taste in friends.</p></div>
+      <div><span class="who">My mom</span><q>Loves her.</q><p style="margin:8px 0 0;font-size:15px">No further questions.</p></div>
+      <div><span class="who">My sisters</span><q>Love her.</q><p style="margin:8px 0 0;font-size:15px">Unanimous, which almost never happens.</p></div>
+      <div><span class="who">My dad</span><q>Loves her too.</q><p style="margin:8px 0 0;font-size:15px">And, like everyone else, asks how she's doing.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap eval">
+    <div>
+      <span class="tag typed">Reversal of roles</span>
+      <h2>Psychological evaluation</h2>
+      <p class="lede">She studied psychology, so she usually does the assessing. For once, somebody else gets to write the report.</p>
+      <svg class="dog" viewBox="0 0 300 200" role="img" aria-label="A small dog wagging its tail">
+        <ellipse cx="150" cy="186" rx="96" ry="8" fill="#000" opacity=".5"/>
+        <path class="tail" d="M206 122 q32 -24 30 -58" stroke="#c99b5d" stroke-width="12" fill="none" stroke-linecap="round"/>
+        <ellipse cx="150" cy="135" rx="66" ry="40" fill="#c99b5d"/>
+        <rect x="100" y="150" width="16" height="34" rx="8" fill="#b4864a"/><rect x="128" y="154" width="16" height="30" rx="8" fill="#c99b5d"/>
+        <rect x="168" y="154" width="16" height="30" rx="8" fill="#c99b5d"/><rect x="190" y="150" width="16" height="34" rx="8" fill="#b4864a"/>
+        <circle cx="94" cy="96" r="38" fill="#d8ad6f"/>
+        <path d="M66 70 q-22 10 -16 48 q16 -4 22 -26z" fill="#8a5d2b"/><path d="M118 66 q22 6 22 44 q-16 -2 -24 -24z" fill="#8a5d2b"/>
+        <ellipse cx="82" cy="110" rx="16" ry="12" fill="#f1d9ae"/>
+        <circle cx="78" cy="104" r="5" fill="#231c14"/><circle cx="82" cy="90" r="4" fill="#231c14"/><circle cx="106" cy="90" r="4" fill="#231c14"/>
+        <path d="M120 128 q10 10 26 4" stroke="#c8102e" stroke-width="6" fill="none" stroke-linecap="round"/>
+      </svg>
+      <p class="lede" style="font-size:15px">Exhibit D: a dog, because she loves animals and dogs above all. This one is very happy to see her.</p>
+    </div>
+    <div class="report">
+      <table>
+        <tr><td>Subject</td><td>Tsedey Fasil</td></tr>
+        <tr><td>Communication</td><td>Exceptionally articulate. Clear, thoughtful, persuasive.</td></tr>
+        <tr><td>Moral compass</td><td>Fixed and reliable. Principled to the core.</td></tr>
+        <tr><td>Faith</td><td>Deep and sincere. Takes her walk with God seriously, and serves at church on the kebero.</td></tr>
+        <tr><td>Work ethic</td><td>Hustler. Disciplined. Does not quit.</td></tr>
+        <tr><td>Interests</td><td>Crime shows, especially anything with Chris Hansen. Dogs. Animals in general.</td></tr>
+        <tr><td>Temperament</td><td>Kind soul. Lovely to be around. Genuinely interesting.</td></tr>
+        <tr><td>Physical strength</td><td>See Exhibit P.</td></tr>
+        <tr><td>Risk assessment</td><td>Very high risk of making people love her.</td></tr>
+      </table>
+      <p class="sig">Assessed by someone more than lucky to call her a friend</p>
+    </div>
+  </div>
+</section>
+
+<section class="band verdict" id="verdict">
+  <div class="wrap">
+    <span class="tag typed">Final hearing</span>
+    <h2>The court has reached a verdict</h2>
+    <p class="lede" style="margin-inline:auto">All rise.</p>
+    <button class="btn" id="vbtn" style="margin-top:28px">Read the verdict</button>
+    <div class="reveal" aria-live="polite">
+      <div class="vphoto">
+        <img src="img/p11.jpg" alt="Tsedey laughing in a spotlight">
+        <span class="stamp">GUILTY</span>
+      </div>
+      <p class="vtext">Guilty of being the best friend anyone could ask for. Sentence: <em>a lifetime of friendship</em>, with no chance of parole.</p>
+      <p class="amh am">መልካም ልደት ፀደይ</p>
+      <p class="amsub am" style="font-size:20px">እግዚአብሔር ዕድሜና ጤና ይስጥሽ</p>
+      <p class="amsub" style="margin-top:8px">Happy birthday, Tsedey. May God give you long life and good health. Your name means spring, the season after the rains, and that is exactly what you have been in my life.</p>
+      <div class="letter">
+        <p>Tsedey,</p>
+        <p>You made uni memorable. You were there for me in every up and every down, and you still are. Your family welcomed me, mine adores you, and somewhere along the way you stopped being my friend from class and became family.</p>
+        <p>I love how you speak, how you hold on to what you believe, how hard you work, and how kind you are to everyone, dogs included. I'm more than lucky to call you my friend.</p>
+        <p>Here's to this year, and to all the memories we haven't made yet.</p>
+        <p class="sig">Tinsae</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="typed">Case status: open. Still making memories.</footer>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Exhibit">
+  <button id="lbx" aria-label="Close">×</button>
+  <img id="lbi" alt="">
+  <p id="lbc"></p>
+</div>
+
+<script>
+{
+const ex=[
+ ['p14','Exhibit A','Flexing. Witnesses confirm the bicep is real. The pushup count is under review.'],
+ ['p17','Exhibit B','In netela, weaving a Hosanna palm. Faith is not a hobby for her. It is who she is.'],
+ ['p01','Exhibit C','The smile. Multiple reports say it fixes bad days on contact.'],
+ ['p06','Exhibit E','Holding flowers, as she always should be.'],
+ ['p03','Exhibit F','Caught on camera. Suspect shows no remorse whatsoever.'],
+ ['p07','Exhibit G','Spotted at a cafe with a Sprite. Behaving suspiciously calm.'],
+ ['p02','Exhibit H','Composed, patient, possibly analysing everyone in the room. Psychology graduate.'],
+ ['p04','Exhibit I','Late night footage. The lighting is poor. The face is not.'],
+ ['p05','Exhibit J','Last seen in red velvet. Case escalated immediately.'],
+ ['p10','Exhibit L','Studio session. Subject posed like she already knew she would win.'],
+ ['p09','Exhibit M','A rare moment of looking away from the camera. Still in control.'],
+ ['p13','Exhibit N','Under the spotlight and completely unbothered.'],
+ ['p08','Exhibit O','Walking into her next chapter like she owns it.']
+];
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const pin=([f,l,c])=>`<button class="pin" data-f="${f}" data-c="${esc(l+'. '+c)}"><img loading="lazy" src="img/${f}.jpg" alt="${esc(c)}"><div class="ex">${esc(l)}</div><div class="cap">${esc(c)}</div></button>`;
+document.getElementById('grid').innerHTML=ex.map(pin).join('');
+document.getElementById('pair').innerHTML=[
+ ['p15','Exhibit Q','Photobooth strips. Every frame, a crime of joy.'],
+ ['p16','Exhibit R','Late night video call. Quality: terrible. Value: priceless.']
+].map(pin).join('');
+
+const lb=document.getElementById('lb'),lbi=document.getElementById('lbi'),lbc=document.getElementById('lbc');
+document.addEventListener('click',e=>{const p=e.target.closest('.pin');if(!p)return;lbi.src='img/'+p.dataset.f+'.jpg';lbi.alt=p.dataset.c;lbc.textContent=p.dataset.c;lb.classList.add('on');document.getElementById('lbx').focus()});
+const close=()=>lb.classList.remove('on');
+document.getElementById('lbx').addEventListener('click',close);
+lb.addEventListener('click',e=>{if(e.target===lb)close()});
+
+let n=5;try{const s=+localStorage.getItem('tsedeyPushups');if(s>5)n=s}catch(e){}
+const pc=document.getElementById('pc'),pn=document.getElementById('pnote');
+const lines={6:'New record. Filed with the court.',7:'The defence is getting nervous.',10:'Double digits. Chris Hansen would be impressed.',15:'Officers are requesting backup.',20:'This is no longer a birthday. This is a training camp.'};
+const show=()=>{pc.textContent=n;pn.textContent=lines[n]||(n>20?'Record broken again. The file is getting thick.':'')};
+show();
+document.getElementById('pup').addEventListener('click',()=>{n++;show();try{localStorage.setItem('tsedeyPushups',n)}catch(e){}});
+document.getElementById('preset').addEventListener('click',()=>{n=5;show();try{localStorage.setItem('tsedeyPushups',5)}catch(e){}});
+
+let ac;
+const ctx=()=>{try{ac=ac||new (window.AudioContext||window.webkitAudioContext)();if(ac.state==='suspended')ac.resume()}catch(e){}return ac};
+function hit(deep){
+ const a=ctx();if(!a)return;const t=a.currentTime;
+ const o=a.createOscillator(),g=a.createGain();
+ o.type='sine';o.frequency.setValueAtTime(deep?120:300,t);o.frequency.exponentialRampToValueAtTime(deep?52:180,t+(deep?.35:.12));
+ g.gain.setValueAtTime(deep?1:.6,t);g.gain.exponentialRampToValueAtTime(.001,t+(deep?.5:.18));
+ o.connect(g).connect(a.destination);o.start(t);o.stop(t+.55);
+ const len=a.sampleRate*.06,b=a.createBuffer(1,len,a.sampleRate),d=b.getChannelData(0);
+ for(let i=0;i<len;i++)d[i]=(Math.random()*2-1)*(1-i/len);
+ const s=a.createBufferSource(),f=a.createBiquadFilter(),ng=a.createGain();
+ s.buffer=b;f.type='bandpass';f.frequency.value=deep?900:2600;ng.gain.value=deep?.25:.45;
+ s.connect(f).connect(ng).connect(a.destination);s.start(t);
+}
+let beats=0;const dn=document.getElementById('dnote');
+const play=(id,deep)=>{const el=document.getElementById(id);hit(deep);el.classList.add('hit');setTimeout(()=>el.classList.remove('hit'),90);beats++;
+ if(beats===12)dn.textContent='Not bad. She would still play circles around you.';
+ if(beats===40)dn.textContent='The congregation is impressed. Mostly.';};
+document.getElementById('dum').addEventListener('click',()=>play('dum',true));
+document.getElementById('tek').addEventListener('click',()=>play('tek',false));
+document.addEventListener('keydown',e=>{
+ if(e.key==='Escape')close();
+ if(e.target.closest('input,textarea'))return;
+ if(e.key==='d'||e.key==='D')play('dum',true);
+ if(e.key==='k'||e.key==='K')play('tek',false);
+});
+
+document.getElementById('vbtn').addEventListener('click',()=>{document.getElementById('verdict').classList.add('open')});
+}
+</script>
+</body>
+</html>
